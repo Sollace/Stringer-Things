@@ -1,0 +1,11 @@
+{
+
+  "item.stringerthings.string_pickaxe": "String Pickaxe",
+  "item.stringerthings.string_axe": "String Axe",
+  "item.stringerthings.string_shovel": "String Shovel",
+  "item.stringerthings.string_sword": "String Sword",
+  "item.stringerthings.string_hoe": "String Hoe",
+  
+  "advancements.stringerthings.why.title": "Why",
+  "advancements.stringerthings.why.description": "It's totally useless"
+}

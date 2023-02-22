@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "stringerthings:string_sword",
+    "stringerthings:string_axe",
+    "stringerthings:string_pickaxe",
+    "stringerthings:string_shovel",
+    "stringerthings:string_hoe"
+  ]
+}

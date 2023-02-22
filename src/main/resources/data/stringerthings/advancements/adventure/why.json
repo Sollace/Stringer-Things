@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": {
+      "item": "stringerthings:string_hoe"
+    },
+    "title": {
+      "translate": "advancements.stringerthings.why.title"
+    },
+    "description": {
+      "translate": "advancements.stringerthings.why.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "has_apple": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": [ "stringerthings:string_hoe" ] }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [ "has_apple" ]
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "stringerthings",
+  "version": "${version}",
+  "name": "Stringer Things",
+  "description": "Things, made out of Strings",
+  "authors": [ "Sollace", "PhoenixSC" ],
+  "contact": {
+    "sources": "https://github.com/Sollace/StringerThings",
+    "issues": "https://github.com/Sollace/StringerThings/issues"
+  },
+  "mixins": [
+    "stringerthings.mixin.json"
+  ],
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+  	"main": [
+      "com.sollace.stringerthings.StringerThings"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.12.0",
+    "java": ">=17",
+    "fabric-api-base": ">=0.1.0"
+  },
+  "suggests": {
+    "minelp": "*",
+    "modmenu": "*"
+  },
+  "custom": {
+    "fabwork": {
+      "requiredOn": "*"
+    },
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/zKSZ8Mg"
+      }
+    }
+  }
+}
