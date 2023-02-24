@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -25,6 +27,8 @@ public interface SSItems {
     Item STRING_AXE = register("string_axe", 2, new AxeItem(StringToolMaterial.INSTANCE, 7.0f, -3.2f, new Item.Settings()));
     Item STRING_HOE = register("string_hoe", 3, new HoeItem(StringToolMaterial.INSTANCE, -1, -2.0f, new Item.Settings()) {});
 
+    Item STRING_BOOTS = register("string_boots", 1, new ArmorItem(StringArmorMaterial.INSTANCE, EquipmentSlot.FEET, new Item.Settings()));
+
     static Item register(String name, int level, Item item) {
         SILKY_LEVELS.put(item, level);
         return Registry.register(Registries.ITEM, new Identifier("stringerthings", name), item);
@@ -37,6 +41,7 @@ public interface SSItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(event -> {
             event.addAfter(Items.NETHERITE_SWORD, STRING_SWORD);
             event.addAfter(Items.NETHERITE_AXE, STRING_AXE);
+            event.addAfter(Items.NETHERITE_BOOTS, STRING_BOOTS);
         });
     }
 }

@@ -3,6 +3,9 @@ package com.sollace.stringerthings;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
@@ -37,5 +40,10 @@ public class StringerThings implements ModInitializer {
                     enchantments.add(EnchantmentHelper.createNbt(EnchantmentHelper.getEnchantmentId(Enchantments.SILK_TOUCH), 1));
                 });
         }
+    }
+
+    public static boolean hasStringBoots(Entity entity) {
+        return entity instanceof LivingEntity l
+                && l.getEquippedStack(EquipmentSlot.FEET).isIn(SSTags.STRING_BOOTS);
     }
 }
