@@ -3,6 +3,8 @@ package com.sollace.stringerthings;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -21,6 +23,8 @@ public interface SSItems {
     Item STRING_PICKAXE = register("string_pickaxe", 2, new PickaxeItem(StringToolMaterial.INSTANCE, 1, -2.8f, new Item.Settings().group(ItemGroup.TOOLS)));
     Item STRING_AXE = register("string_axe", 2, new AxeItem(StringToolMaterial.INSTANCE, 7.0f, -3.2f, new Item.Settings().group(ItemGroup.TOOLS)));
     Item STRING_HOE = register("string_hoe", 3, new HoeItem(StringToolMaterial.INSTANCE, -1, -2.0f, new Item.Settings().group(ItemGroup.TOOLS)) {});
+
+    Item STRING_BOOTS = register("string_boots", 1, new ArmorItem(StringArmorMaterial.INSTANCE, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT)));
 
     static Item register(String name, int level, Item item) {
         SILKY_LEVELS.put(item, level);

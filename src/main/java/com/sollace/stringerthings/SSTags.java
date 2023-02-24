@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 
 public interface SSTags {
     TagKey<Item> STRING_TOOLS = register("string_tools");
+    TagKey<Item> STRING_BOOTS = register("string_boots");
 
     static TagKey<Item> register(String name) {
         return TagKey.of(Registry.ITEM_KEY, new Identifier("c", name));
