@@ -1,14 +1,14 @@
 package com.sollace.stringerthings;
 
 import net.minecraft.item.Item;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 
 public interface SSTags {
     TagKey<Item> STRING_TOOLS = register("string_tools");
 
     static TagKey<Item> register(String name) {
-        return TagKey.of(Registry.ITEM_KEY, new Identifier("c", name));
+        return TagKey.of(RegistryKeys.ITEM, new Identifier("c", name));
     }
 }
