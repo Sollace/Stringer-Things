@@ -1,6 +1,6 @@
 package com.sollace.stringerthings;
 
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -10,12 +10,12 @@ public class StringArmorMaterial implements ArmorMaterial {
     public static final ArmorMaterial INSTANCE = new StringArmorMaterial();
 
     @Override
-    public int getDurability(EquipmentSlot slot) {
+    public int getDurability(ArmorItem.Type type) {
         return 15;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
+    public int getProtection(ArmorItem.Type type) {
         return 0;
     }
 
