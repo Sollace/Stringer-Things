@@ -1,8 +1,11 @@
 package com.sollace.stringerthings;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 
 public class StringToolMaterial implements ToolMaterial {
     public static final ToolMaterial INSTANCE = new StringToolMaterial();
@@ -25,11 +28,6 @@ public class StringToolMaterial implements ToolMaterial {
     }
 
     @Override
-    public int getMiningLevel() {
-        return 1;
-    }
-
-    @Override
     public int getEnchantability() {
         return 9000;
     }
@@ -37,5 +35,10 @@ public class StringToolMaterial implements ToolMaterial {
     @Override
     public Ingredient getRepairIngredient() {
         return repairIngredient;
+    }
+
+    @Override
+    public TagKey<Block> getInverseTag() {
+        return BlockTags.INCORRECT_FOR_STONE_TOOL;
     }
 }

@@ -1,9 +1,9 @@
 package com.sollace.stringerthings;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
@@ -18,19 +18,22 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
 
 public interface SSItems {
-    Map<Item, Integer> SILKY_LEVELS = new HashMap<>();
+    Item STRING_SWORD = register("string_sword", new SwordItem(StringToolMaterial.INSTANCE, makeSilky(1).attributeModifiers(SwordItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 3, -2.4F))));
+    Item STRING_SHOVEL = register("string_shovel", new ShovelItem(StringToolMaterial.INSTANCE, makeSilky(2).attributeModifiers(ShovelItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 1.5F, -3))));
+    Item STRING_PICKAXE = register("string_pickaxe", new PickaxeItem(StringToolMaterial.INSTANCE, makeSilky(2).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 1, -2.8F))));
+    Item STRING_AXE = register("string_axe", new AxeItem(StringToolMaterial.INSTANCE, makeSilky(2).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 7, -3.2F))));
+    Item STRING_HOE = register("string_hoe", new HoeItem(StringToolMaterial.INSTANCE, makeSilky(3).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, -1, -2))) {});
 
-    Item STRING_SWORD = register("string_sword", 1, new SwordItem(StringToolMaterial.INSTANCE, 3, -2.4f, new Item.Settings()));
-    Item STRING_SHOVEL = register("string_shovel", 2, new ShovelItem(StringToolMaterial.INSTANCE, 1.5f, -3.0f, new Item.Settings()));
-    Item STRING_PICKAXE = register("string_pickaxe", 2, new PickaxeItem(StringToolMaterial.INSTANCE, 1, -2.8f, new Item.Settings()));
-    Item STRING_AXE = register("string_axe", 2, new AxeItem(StringToolMaterial.INSTANCE, 7.0f, -3.2f, new Item.Settings()));
-    Item STRING_HOE = register("string_hoe", 3, new HoeItem(StringToolMaterial.INSTANCE, -1, -2.0f, new Item.Settings()) {});
+    Item STRING_BOOTS = register("string_boots", new ArmorItem(StringArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, makeSilky(1).maxCount(1)));
 
-    Item STRING_BOOTS = register("string_boots", 1, new ArmorItem(StringArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, new Item.Settings()));
-
-    static Item register(String name, int level, Item item) {
-        SILKY_LEVELS.put(item, level);
+    static Item register(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier("stringerthings", name), item);
+    }
+
+    static Item.Settings makeSilky(int level) {
+        var builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
+        builder.add(Enchantments.SILK_TOUCH, level);
+        return new Item.Settings().component(DataComponentTypes.ENCHANTMENTS, builder.build());
     }
 
     static void bootstrap() {
