@@ -10,6 +10,6 @@ public interface SSTags {
     TagKey<Item> STRING_BOOTS = register("string_boots");
 
     static TagKey<Item> register(String name) {
-        return TagKey.of(RegistryKeys.ITEM, new Identifier("c", name));
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of("c", name));
     }
 }
