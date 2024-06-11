@@ -8,5 +8,7 @@
   "item.stringerthings.string_boots": "String Boots",
   
   "advancements.stringerthings.why.title": "Why",
-  "advancements.stringerthings.why.description": "It's totally useless"
+  "advancements.stringerthings.why.description": "It's totally useless",
+
+  "subtitles.item.armor.equip_string": "String armor rustles"
 }
