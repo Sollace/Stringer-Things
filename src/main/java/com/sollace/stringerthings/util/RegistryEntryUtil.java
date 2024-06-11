@@ -15,7 +15,7 @@ import net.minecraft.util.Util;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public final class RegistryEntryUtil {
     // Mojank
-    private static final Function<RegistryKey<Registry<?>>, ReferenceMaker<?>> REFERENCE_MAKERS = Util.memoize(ReferenceMaker::new);
+    private static final Function<RegistryKey<Registry<?>>, ReferenceMaker<?>> REFERENCE_MAKERS = Util.memoize(i -> new ReferenceMaker(i));
 
     public static <T> RegistryEntry<T> dynamicEntryOf(RegistryKey<T> key) {
         return ((ReferenceMaker<T>)REFERENCE_MAKERS.apply((RegistryKey)key.getRegistryRef())).get(key);
