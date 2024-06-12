@@ -46,6 +46,7 @@ public interface SSItems {
     Item STRING_PICKAXE = register("string_pickaxe", new PickaxeItem(StringToolMaterial.INSTANCE, makeSilky(2).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 1, -2.8F))));
     Item STRING_AXE = register("string_axe", new AxeItem(StringToolMaterial.INSTANCE, makeSilky(2).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, 7, -3.2F))));
     Item STRING_HOE = register("string_hoe", new HoeItem(StringToolMaterial.INSTANCE, makeSilky(3).attributeModifiers(PickaxeItem.createAttributeModifiers(StringToolMaterial.INSTANCE, -1, -2))) {});
+    Item STRING_MACE = register("string_mace", new StringMaceItem(makeSilky(1)));
 
     Item STRING_BOOTS = register("string_boots", new ArmorItem(StringArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, makeSilky(1).maxCount(1)));
 
@@ -65,6 +66,7 @@ public interface SSItems {
             event.addAfter(Items.NETHERITE_SWORD, STRING_SWORD);
             event.addAfter(Items.NETHERITE_AXE, STRING_AXE);
             event.addAfter(Items.NETHERITE_BOOTS, STRING_BOOTS);
+            event.addAfter(Items.MACE, STRING_MACE);
         });
     }
 }
