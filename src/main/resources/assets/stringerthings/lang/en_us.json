@@ -7,8 +7,8 @@
   "item.stringerthings.string_hoe": "String Hoe",
   "item.stringerthings.string_boots": "String Boots",
   
-  "tag.item.stringerthings.string_boots": "String Boots",
-  "tag.item.stringerthings.string_tools": "String Tools",
+  "tag.item.c.string_boots": "String Boots",
+  "tag.item.c.string_tools": "String Tools",
 
   "advancements.stringerthings.why.title": "Why",
   "advancements.stringerthings.why.description": "It's totally useless",

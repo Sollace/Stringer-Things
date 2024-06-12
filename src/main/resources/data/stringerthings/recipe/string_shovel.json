@@ -1,15 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "S S",
-    "S S"
+    "S",
+    "I",
+    "I"
   ],
   "key": {
+    "I": {
+      "item": "minecraft:stick"
+    },
     "S": {
       "item": "minecraft:string"
     }
   },
   "result": {
-    "item": "stringerthings:string_boots"
+    "id": "stringerthings:string_shovel"
   }
 }

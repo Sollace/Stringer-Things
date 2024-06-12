@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SS ",
-    "SI ",
+    "SSS",
+    " I ",
     " I "
   ],
   "key": {
@@ -14,6 +14,6 @@
     }
   },
   "result": {
-    "item": "stringerthings:string_axe"
+    "id": "stringerthings:string_pickaxe"
   }
 }

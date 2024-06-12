@@ -2,7 +2,7 @@
   "parent": "minecraft:adventure/root",
   "display": {
     "icon": {
-      "item": "stringerthings:string_hoe"
+      "id": "stringerthings:string_hoe"
     },
     "title": {
       "translate": "advancements.stringerthings.why.title"

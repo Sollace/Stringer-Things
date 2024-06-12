@@ -6,7 +6,8 @@
       "stringerthings:string_pickaxe",
       "stringerthings:string_shovel",
       "stringerthings:string_sword",
-      "stringerthings:string_hoe"
+      "stringerthings:string_hoe",
+      "stringerthings:string_mace"
     ]
   },
   "criteria": {

@@ -2,18 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "S",
-    "I",
     "I"
   ],
   "key": {
     "I": {
-      "item": "minecraft:stick"
+      "item": "minecraft:breeze_rod"
     },
     "S": {
       "item": "minecraft:string"
     }
   },
   "result": {
-    "item": "stringerthings:string_shovel"
+    "id": "stringerthings:string_mace"
   }
 }
