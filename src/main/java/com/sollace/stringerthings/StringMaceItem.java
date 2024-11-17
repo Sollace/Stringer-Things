@@ -15,7 +15,7 @@ public class StringMaceItem extends MaceItem {
     public StringMaceItem(Settings settings) {
         super(settings
                 .attributeModifiers(createAttributeModifiers())
-                .maxDamage(StringToolMaterial.INSTANCE.getDurability())
+                .maxDamage(SSMaterials.TOOL_MATERIAL.durability())
                 .component(DataComponentTypes.TOOL, MaceItem.createToolComponent())
         );
     }
@@ -23,12 +23,12 @@ public class StringMaceItem extends MaceItem {
     public static AttributeModifiersComponent createAttributeModifiers() {
         return AttributeModifiersComponent.builder()
             .add(
-                EntityAttributes.GENERIC_ATTACK_KNOCKBACK,
+                EntityAttributes.ATTACK_KNOCKBACK,
                 new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, 12.0, Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
             )
             .add(
-                EntityAttributes.GENERIC_ATTACK_SPEED,
+                EntityAttributes.ATTACK_SPEED,
                 new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, -3.4F, Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
             )
