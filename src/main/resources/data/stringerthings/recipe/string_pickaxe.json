@@ -6,12 +6,8 @@
     " I "
   ],
   "key": {
-    "I": {
-      "item": "minecraft:stick"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "I": "minecraft:stick",
+    "S": "minecraft:string"
   },
   "result": {
     "id": "stringerthings:string_pickaxe"

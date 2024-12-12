@@ -4,7 +4,9 @@ import java.util.EnumMap;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.BlockTags;
 
 public interface SSMaterials {
@@ -23,6 +25,6 @@ public interface SSMaterials {
             SSSounds.ITEM_ARMOR_EQUIP_STRING,
             0F, 0F,
             SSTags.STRING_REPAIR_INGREDIENT,
-            StringerThings.id("string")
+            RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, StringerThings.id("string"))
     );
 }

@@ -5,9 +5,7 @@
     "S S"
   ],
   "key": {
-    "S": {
-      "item": "minecraft:string"
-    }
+    "S": "minecraft:string"
   },
   "result": {
     "id": "stringerthings:string_boots"

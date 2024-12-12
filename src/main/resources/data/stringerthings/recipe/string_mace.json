@@ -5,12 +5,8 @@
     "I"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:breeze_rod"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "I": "minecraft:breeze_rod",
+    "S": "minecraft:string"
   },
   "result": {
     "id": "stringerthings:string_mace"
