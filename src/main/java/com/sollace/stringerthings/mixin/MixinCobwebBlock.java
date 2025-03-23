@@ -10,13 +10,14 @@ import com.sollace.stringerthings.StringerThings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CobwebBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @Mixin(CobwebBlock.class)
 abstract class MixinCobwebBlock {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo info) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, CallbackInfo info) {
         if (StringerThings.hasStringBoots(entity)) {
             info.cancel();
         }

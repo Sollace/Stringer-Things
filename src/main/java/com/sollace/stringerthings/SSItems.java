@@ -10,15 +10,12 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -43,14 +40,14 @@ public interface SSItems {
         return builder.build();
     });
 
-    Item STRING_SWORD = register("string_sword", settings -> new SwordItem(SSMaterials.TOOL_MATERIAL, 3, -2.4F, makeSilky(settings, 1)));
+    Item STRING_SWORD = register("string_sword", settings -> new Item(makeSilky(settings, 1).sword(SSMaterials.TOOL_MATERIAL, 3, -2.4F)));
     Item STRING_SHOVEL = register("string_shovel", settings -> new ShovelItem(SSMaterials.TOOL_MATERIAL, 1.5F, -3, makeSilky(settings, 2)));
-    Item STRING_PICKAXE = register("string_pickaxe", settings -> new PickaxeItem(SSMaterials.TOOL_MATERIAL, 1, -2.8F, makeSilky(settings, 2)));
+    Item STRING_PICKAXE = register("string_pickaxe", settings -> new Item(makeSilky(settings, 2).pickaxe(SSMaterials.TOOL_MATERIAL, 1, -2.8F)));
     Item STRING_AXE = register("string_axe", settings -> new AxeItem(SSMaterials.TOOL_MATERIAL, 7, -3.2F, makeSilky(settings, 2)));
     Item STRING_HOE = register("string_hoe", settings -> new HoeItem(SSMaterials.TOOL_MATERIAL, -1, -2, makeSilky(settings, 3)) {});
     Item STRING_MACE = register("string_mace", settings -> new StringMaceItem(makeSilky(settings, 1)));
 
-    Item STRING_BOOTS = register("string_boots", settings -> new ArmorItem(SSMaterials.ARMOR_MATERIAL, EquipmentType.BOOTS, makeSilky(settings, 1).maxCount(1)));
+    Item STRING_BOOTS = register("string_boots", settings -> new Item(makeSilky(settings, 1).armor(SSMaterials.ARMOR_MATERIAL, EquipmentType.BOOTS).maxCount(1)));
 
     static Item register(String name, Function<Item.Settings, Item> factory) {
         RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, StringerThings.id(name));
