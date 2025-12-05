@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 @Mixin(CobwebBlock.class)
 abstract class MixinCobwebBlock {
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, CallbackInfo info) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean intersecting, CallbackInfo info) {
         if (StringerThings.hasStringBoots(entity)) {
             info.cancel();
         }
