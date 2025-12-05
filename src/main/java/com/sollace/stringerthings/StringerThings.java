@@ -1,16 +1,17 @@
 package com.sollace.stringerthings;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+
 
 public class StringerThings implements ModInitializer {
     private static final String DEFAULT_NAMESPACE = "stringerthings";
 
     public static Identifier id(String name) {
-        return Identifier.of(DEFAULT_NAMESPACE, name);
+        return Identifier.fromNamespaceAndPath(DEFAULT_NAMESPACE, name);
     }
 
     @Override
@@ -20,6 +21,6 @@ public class StringerThings implements ModInitializer {
 
     public static boolean hasStringBoots(Entity entity) {
         return entity instanceof LivingEntity l
-                && l.getEquippedStack(EquipmentSlot.FEET).isIn(SSTags.STRING_BOOTS);
+                && l.getItemBySlot(EquipmentSlot.FEET).is(SSTags.STRING_BOOTS);
     }
 }

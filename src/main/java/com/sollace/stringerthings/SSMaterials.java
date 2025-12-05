@@ -2,12 +2,12 @@ package com.sollace.stringerthings;
 
 import java.util.EnumMap;
 
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
-import net.minecraft.item.equipment.EquipmentType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 public interface SSMaterials {
     ToolMaterial TOOL_MATERIAL = new ToolMaterial(
@@ -20,11 +20,11 @@ public interface SSMaterials {
     );
     ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(
             0,
-            new EnumMap<>(EquipmentType.class),
+            new EnumMap<>(ArmorType.class),
             9000,
             SSSounds.ITEM_ARMOR_EQUIP_STRING,
             0F, 0F,
             SSTags.STRING_REPAIR_INGREDIENT,
-            RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, StringerThings.id("string"))
+            ResourceKey.create(EquipmentAssets.ROOT_ID, StringerThings.id("string"))
     );
 }

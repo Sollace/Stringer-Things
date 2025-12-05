@@ -7,17 +7,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.sollace.stringerthings.StringerThings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CobwebBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCollisionHandler;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.WebBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-@Mixin(CobwebBlock.class)
+
+@Mixin(WebBlock.class)
 abstract class MixinCobwebBlock {
-    @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean intersecting, CallbackInfo info) {
+    @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
+    public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean isPrecise, CallbackInfo info) {
         if (StringerThings.hasStringBoots(entity)) {
             info.cancel();
         }

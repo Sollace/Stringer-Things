@@ -1,42 +1,42 @@
 package com.sollace.stringerthings;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.item.MaceItem;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.MaceItem;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class StringMaceItem extends MaceItem {
 
-    public StringMaceItem(Settings settings) {
+    public StringMaceItem(Properties settings) {
         super(settings
-                .attributeModifiers(createAttributeModifiers())
-                .maxDamage(SSMaterials.TOOL_MATERIAL.durability())
-                .component(DataComponentTypes.TOOL, MaceItem.createToolComponent())
+                .attributes(createAttributeModifiers())
+                .durability(SSMaterials.TOOL_MATERIAL.durability())
+                .component(DataComponents.TOOL, MaceItem.createToolProperties())
         );
     }
 
-    public static AttributeModifiersComponent createAttributeModifiers() {
-        return AttributeModifiersComponent.builder()
+    public static ItemAttributeModifiers createAttributeModifiers() {
+        return ItemAttributeModifiers.builder()
             .add(
-                EntityAttributes.ATTACK_KNOCKBACK,
-                new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, 12.0, Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
+                Attributes.ATTACK_KNOCKBACK,
+                new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 12.0, Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND
             )
             .add(
-                EntityAttributes.ATTACK_SPEED,
-                new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, -3.4F, Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
+                Attributes.ATTACK_SPEED,
+                new AttributeModifier(BASE_ATTACK_SPEED_ID, -3.4F, Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND
             )
             .build();
     }
 
     @Override
-    public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
+    public float getAttackDamageBonus(Entity target, float baseAttackDamage, DamageSource damageSource) {
         return -100000;
     }
 }

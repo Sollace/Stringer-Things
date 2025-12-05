@@ -10,39 +10,39 @@ import org.jetbrains.annotations.Nullable;
 import com.mojang.datafixers.util.Either;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryOwner;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderOwner;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Util;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public final class RegistryEntryUtil {
     // Mojank
-    private static final Function<RegistryKey<?>, RegistryEntry<?>> ENTRIES = Util.memoize(ref -> {
-        return (RegistryEntry)new IndirectReferenceEntry(ref.getRegistryRef(), ref);
+    private static final Function<ResourceKey<?>, Holder<?>> ENTRIES = Util.memoize(ref -> {
+        return (Holder)new IndirectReferenceEntry(ref.registryKey(), ref);
     });
 
-    public static <T> RegistryEntry<T> dynamicEntryOf(RegistryKey<T> key) {
-        return (RegistryEntry<T>)ENTRIES.apply(key);
+    public static <T> Holder<T> dynamicEntryOf(ResourceKey<T> key) {
+        return (Holder<T>)ENTRIES.apply(key);
     }
 
-    private static final class IndirectReferenceEntry<T> implements RegistryEntry<T> {
+    private static final class IndirectReferenceEntry<T> implements Holder<T> {
 
         @Nullable
         T value;
-        private final RegistryKey<T> key;
+        private final ResourceKey<T> key;
         @Nullable
         private Registry<T> owner;
 
-        public IndirectReferenceEntry(RegistryKey<Registry<T>> registry, RegistryKey<T> value) {
+        public IndirectReferenceEntry(ResourceKey<Registry<T>> registry, ResourceKey<T> value) {
             this.key = value;
 
             DynamicRegistrySetupCallback.EVENT.register(registries -> {
                 registries.registerEntryAdded(registry, (raw, id, object) -> {
-                    if (matchesId(id)) {
+                    if (is(id)) {
                         this.value = object;
                         this.owner = registries.getOptional(registry).orElse(null);
                     }
@@ -56,58 +56,58 @@ public final class RegistryEntryUtil {
         }
 
         @Override
-        public boolean hasKeyAndValue() {
+        public boolean isBound() {
             return value != null;
         }
 
         @Override
-        public boolean matchesId(Identifier id) {
-            return key.getValue().equals(id);
+        public boolean is(Identifier id) {
+            return key.identifier().equals(id);
         }
 
         @Override
-        public boolean matchesKey(RegistryKey<T> key) {
+        public boolean is(ResourceKey<T> key) {
             return this.key.equals(key);
         }
 
         @Override
-        public boolean matches(Predicate<RegistryKey<T>> predicate) {
+        public boolean is(Predicate<ResourceKey<T>> predicate) {
             return predicate.test(key);
         }
 
         @Override
-        public boolean isIn(TagKey<T> tag) {
-            return owner != null && value != null && owner.getEntry(value).isIn(tag);
+        public boolean is(TagKey<T> tag) {
+            return owner != null && value != null && owner.wrapAsHolder(value).is(tag);
         }
 
         @Override
-        public boolean matches(RegistryEntry<T> entry) {
+        public boolean is(Holder<T> entry) {
             return entry == this || entry.value() == value;
         }
 
         @Override
-        public Stream<TagKey<T>> streamTags() {
-            return owner != null && value != null ? owner.getEntry(value).streamTags() : Stream.empty();
+        public Stream<TagKey<T>> tags() {
+            return owner != null && value != null ? owner.wrapAsHolder(value).tags() : Stream.empty();
         }
 
         @Override
-        public Either<RegistryKey<T>, T> getKeyOrValue() {
+        public Either<ResourceKey<T>, T> unwrap() {
             return value == null ? Either.left(key) : Either.right(value);
         }
 
         @Override
-        public Optional<RegistryKey<T>> getKey() {
+        public Optional<ResourceKey<T>> unwrapKey() {
             return Optional.of(key);
         }
 
         @Override
-        public Type getType() {
-            return Type.REFERENCE;
+        public Kind kind() {
+            return Kind.REFERENCE;
         }
 
         @Override
-        public boolean ownerEquals(RegistryEntryOwner<T> owner) {
-            return this.owner != null && (this.owner == owner || this.owner.ownerEquals(owner));
+        public boolean canSerializeIn(HolderOwner<T> owner) {
+            return this.owner != null && (this.owner == owner || this.owner.canSerializeIn(owner));
         }
     }
 }

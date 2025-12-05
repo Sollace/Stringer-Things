@@ -1,9 +1,9 @@
 package com.sollace.stringerthings;
 
-import net.minecraft.item.Item;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
 public interface SSTags {
     TagKey<Item> STRING_TOOLS = register("string_tools");
@@ -12,6 +12,6 @@ public interface SSTags {
     TagKey<Item> STRING_REPAIR_INGREDIENT = register("string_tool_materials");
 
     static TagKey<Item> register(String name) {
-        return TagKey.of(RegistryKeys.ITEM, Identifier.of("c", name));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", name));
     }
 }
