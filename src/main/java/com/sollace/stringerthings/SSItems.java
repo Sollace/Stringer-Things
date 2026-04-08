@@ -45,6 +45,12 @@ public interface SSItems {
     Item STRING_PICKAXE = register("string_pickaxe", settings -> new Item(makeSilky(settings, 2).pickaxe(SSMaterials.TOOL_MATERIAL, 1, -2.8F)));
     Item STRING_AXE = register("string_axe", settings -> new AxeItem(SSMaterials.TOOL_MATERIAL, 7, -3.2F, makeSilky(settings, 2)));
     Item STRING_HOE = register("string_hoe", settings -> new HoeItem(SSMaterials.TOOL_MATERIAL, -1, -2, makeSilky(settings, 3)) {});
+    Item STRING_SPEAR = register("string_spear", settings -> new Item(makeSilky(settings, 3).spear(SSMaterials.TOOL_MATERIAL,
+            0.65F, 0.1F, 0.175F,
+            20, 4,
+            3, 15.1F,
+            5, 14.6F
+    )));
     Item STRING_MACE = register("string_mace", settings -> new StringMaceItem(makeSilky(settings, 1)));
 
     Item STRING_BOOTS = register("string_boots", settings -> new Item(makeSilky(settings, 1).humanoidArmor(SSMaterials.ARMOR_MATERIAL, ArmorType.BOOTS).stacksTo(1)));
