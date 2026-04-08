@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 import com.sollace.stringerthings.util.RegistryEntryUtil;
 
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
@@ -29,7 +29,7 @@ public interface SSItems {
         ItemEnchantments.Mutable builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
         builder.set(RegistryEntryUtil.dynamicEntryOf(Enchantments.SILK_TOUCH), level);
         DynamicRegistrySetupCallback.EVENT.register(registries -> {
-            registries.registerEntryAdded(Registries.ENCHANTMENT, (raw, id, value) -> {
+            registries.registerEntryAdded(Registries.ENCHANTMENT, (_, id, value) -> {
                 if (Enchantments.SILK_TOUCH.identifier().equals(id)) {
                     Holder<Enchantment> entry = registries.getOptional(Registries.ENCHANTMENT).get().wrapAsHolder(value);
                     builder.set(entry, level);
@@ -59,14 +59,14 @@ public interface SSItems {
     }
 
     static void bootstrap() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(event -> {
-            event.addAfter(Items.NETHERITE_HOE, STRING_SHOVEL, STRING_PICKAXE, STRING_AXE, STRING_HOE);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(event -> {
+            event.insertAfter(Items.NETHERITE_HOE, STRING_SHOVEL, STRING_PICKAXE, STRING_AXE, STRING_HOE);
         });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(event -> {
-            event.addAfter(Items.NETHERITE_SWORD, STRING_SWORD);
-            event.addAfter(Items.NETHERITE_AXE, STRING_AXE);
-            event.addAfter(Items.NETHERITE_BOOTS, STRING_BOOTS);
-            event.addAfter(Items.MACE, STRING_MACE);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(event -> {
+            event.insertAfter(Items.NETHERITE_SWORD, STRING_SWORD);
+            event.insertAfter(Items.NETHERITE_AXE, STRING_AXE);
+            event.insertAfter(Items.NETHERITE_BOOTS, STRING_BOOTS);
+            event.insertAfter(Items.MACE, STRING_MACE);
         });
     }
 }

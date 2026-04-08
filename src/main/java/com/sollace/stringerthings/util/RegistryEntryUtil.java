@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderOwner;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -22,26 +23,25 @@ import net.minecraft.util.Util;
 public final class RegistryEntryUtil {
     // Mojank
     private static final Function<ResourceKey<?>, Holder<?>> ENTRIES = Util.memoize(ref -> {
-        return (Holder)new IndirectReferenceEntry(ref.registryKey(), ref);
+        return (Holder)new IndirectHolder(ref.registryKey(), ref);
     });
 
     public static <T> Holder<T> dynamicEntryOf(ResourceKey<T> key) {
         return (Holder<T>)ENTRIES.apply(key);
     }
 
-    private static final class IndirectReferenceEntry<T> implements Holder<T> {
-
+    private static final class IndirectHolder<T> implements Holder<T> {
         @Nullable
         T value;
         private final ResourceKey<T> key;
         @Nullable
         private Registry<T> owner;
 
-        public IndirectReferenceEntry(ResourceKey<Registry<T>> registry, ResourceKey<T> value) {
+        public IndirectHolder(ResourceKey<Registry<T>> registry, ResourceKey<T> value) {
             this.key = value;
 
             DynamicRegistrySetupCallback.EVENT.register(registries -> {
-                registries.registerEntryAdded(registry, (raw, id, object) -> {
+                registries.registerEntryAdded(registry, (_, id, object) -> {
                     if (is(id)) {
                         this.value = object;
                         this.owner = registries.getOptional(registry).orElse(null);
@@ -108,6 +108,16 @@ public final class RegistryEntryUtil {
         @Override
         public boolean canSerializeIn(HolderOwner<T> owner) {
             return this.owner != null && (this.owner == owner || this.owner.canSerializeIn(owner));
+        }
+
+        @Override
+        public boolean areComponentsBound() {
+            return owner != null && value != null && owner.wrapAsHolder(value).areComponentsBound();
+        }
+
+        @Override
+        public DataComponentMap components() {
+            return owner != null && value != null ? owner.wrapAsHolder(value).components() : DataComponentMap.EMPTY;
         }
     }
 }
